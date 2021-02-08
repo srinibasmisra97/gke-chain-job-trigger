@@ -39,6 +39,7 @@ def publish_message(foldername):
     topic_path = publisher.topic_path(GCP_PROJECT, GCP_TOPIC)
     publisher.publish(topic_path, foldername.encode("utf-8"))
     print("\nPUBLISHED!\n")
+    print("\nFolder to process: {}\n".format(foldername))
 
 def main():
     now = datetime.datetime.now()
