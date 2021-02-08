@@ -39,7 +39,7 @@ def upload_files(foldername, folderpath):
 
 def main():
     foldername = os.environ.get("PROCESS_FOLDER")
-    folderpath = os.path.join(".\\", foldername)
+    folderpath = os.path.join(".", foldername)
     print("\nDOWNLOADING FILES!\n")
     download_folder(foldername, folderpath)
     print("\nMODIFYING FILES!\n")
