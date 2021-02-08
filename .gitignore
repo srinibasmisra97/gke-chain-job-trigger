@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+gke-chain-job-trigger.json
+App1/2021*
+App2/2021*
