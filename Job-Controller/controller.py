@@ -19,7 +19,8 @@ with NamedTemporaryFile(delete=False) as cert:
 configuration.host = HOST_URL
 configuration.verify_ssl = True
 configuration.debug = False
-configuration.api_key = { "authorization": "Bearer " + TOKEN }
+configuration.api_key = { "authorization": "Bearer {}".format(base64.b64decode(TOKEN).decode("utf-8")) }
+print(configuration.api_key)
 client.Configuration.set_default(configuration)
 
 v1 = client.BatchV1Api()

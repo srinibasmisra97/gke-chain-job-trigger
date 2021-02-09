@@ -4,8 +4,8 @@ steps:
       - "build"
       - "./"
       - "-t"
-      - "us.gcr.io/dev-trials-q/job-controller:v0.4"
+      - "us.gcr.io/dev-trials-q/job-controller:v0.6"
   - name: "gcr.io/cloud-builders/docker"
     args:
       - "push"
-      - "us.gcr.io/dev-trials-q/job-controller:v0.4"
+      - "us.gcr.io/dev-trials-q/job-controller:v0.6"

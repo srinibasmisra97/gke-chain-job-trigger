@@ -10,6 +10,6 @@ spec:
         image: us.gcr.io/dev-trials-q/gke-job-trigger-job2:v0.0
         env:
           - name: PROCESS_FOLDER
-            value: "2021-2-8_11-10-7"
+            value: "2021-2-9_5-51-48"
       restartPolicy: Never
   backoffLimit: 4
