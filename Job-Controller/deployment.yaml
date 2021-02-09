@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: controller
-          image: us.gcr.io/dev-trials-q/job-controller:v0.6
+          image: us.gcr.io/dev-trials-q/job-controller:v0.7
           ports:
             - containerPort: 5000
           env:
