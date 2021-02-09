@@ -1,0 +1,10 @@
+steps:
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      - functions
+      - deploy
+      - gke-job-trigger
+      - --source=./
+      - --trigger-topic=gke-chain-job-trigger
+      - --runtime=python38
+      - --entry-point=trigger_job
