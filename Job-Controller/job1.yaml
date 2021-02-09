@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job1
+spec:
+  template:
+    spec:
+      containers:
+      - name: job1
+        image: us.gcr.io/dev-trials-q/gke-job-trigger-job1:v0.0
+      restartPolicy: Never
+  backoffLimit: 4

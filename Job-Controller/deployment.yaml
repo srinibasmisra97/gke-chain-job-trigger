@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: job-controller
+  name: job-controller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: job-controller
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: job-controller
+      name: job-controller
+    spec:
+      containers:
+        - name: controller
+          image: us.gcr.io/dev-trials-q/job-controller:v0.4
+          ports:
+            - containerPort: 5000
+          env:
+            - name: HOST_URL
+              value: "https://35.223.113.119"
+            - name: CACERT
+              value: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURLekNDQWhPZ0F3SUJBZ0lSQUtoUXh2cU8zQ216NXBvdzFVelpQYW93RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa01EUTJZbVpsWmprdE9UZGtZUzAwTldJMkxUZzRNalF0TURGbE1tUTJOVFEzT0RrMQpNQjRYRFRJeE1ESXdPREE1TkRJeE9Gb1hEVEkyTURJd056RXdOREl4T0Zvd0x6RXRNQ3NHQTFVRUF4TWtNRFEyClltWmxaamt0T1Rka1lTMDBOV0kyTFRnNE1qUXRNREZsTW1RMk5UUTNPRGsxTUlJQklqQU5CZ2txaGtpRzl3MEIKQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBcGttSUZxaWU1c1R2MTdaclFzWjlWRjlHTmpBQVpHc05HVkxveDhUMAp0eVZuYzlwcmVNMHI5RTRjYzJlSXFveUxGWHlOVmFmWUNReUttR2VTMWVlSVc1TmRjY2htREgxOGFtQVFVT1JSCmNXK0NkM2t2cC9tVWRGQzZoSGlzZXk2WERyRWdpTjRLS2o5RnJXYmdaakcrTkFFSVNyQVkzK1pJdVlNeDVMdTUKZXFQUTJZbjRmY0RzNk5KUGVobVhEQ1k4eWh5Qk1SQUlPSnZZNG52MmVVdldwWE5pbERiOTVZSUpSak55N2s5VApNVHJuMW1WUVNMOWVTeisrT3ZBZEhtQ096UWNDQU96QmlFMmt5T1lVUGhnM3Q4d3ROT0ttLzNvQ1lubnorMTRwCm5IOVhCdVU0TzI3VC9kaW83aXNkNmRWR2pPbU5zZS81eERZNWg1WlpEUERINHdJREFRQUJvMEl3UURBT0JnTlYKSFE4QkFmOEVCQU1DQWdRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVWNxNWpNUG5kYjFpbwowYkcvMXlqNHNqTWUyRlV3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUtYMm5aNnNWOG5PaUhUWE5MREx2ZFBRCk9tQ1dzQVZCV0FaYUU0WmNFVTRhNVdxRTlPTmdLM05vcXg5djdNTGMvb1pwUGp2UXpiWTJ2SDJ0anNmMjA0U0wKb1NmZnZlVVk2dEJ0dzBhZmxUWUNON3NkUkhCaGcyTFU1VVJaQjFKNzJYVG40Qnk5cVI3TDczQXlyNndVaGE3TAp4UzJjVlNaQSswbHZ0OWFCM1NCbkNXWWFOcHVrWnpGUFQ4S2dYcUxsNkNYVTZjOTBCTTF3TjZ3WTNiL2NMN2ZFCmlqa0VTQ1VnSHM4NzRGTSs3bXFGd05veEhXZFYraVA4dFNaclBLUUlKY0o5cUJsV0xjdU9sbzczOC9oa2ExWmIKSmI0RVdoNjVFN0Rlc0Y5R0FlTFNBUkNzUlg2K2t1dWxyRXpMN21WOWFUdTdtK01jYXlQQy9ERGh3WlB3L0hBPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+            - name: TOKEN
+              value: "ZXlKaGJHY2lPaUpTVXpJMU5pSXNJbXRwWkNJNkltcEdaVGhtUlY5U1FXZElSRUZmZVZaWlNrbEVhblIzYjFSVk55MHhUa2RYUmxaRlYyTTRVVGN3YzJjaWZRLmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUprWldaaGRXeDBJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpXTnlaWFF1Ym1GdFpTSTZJbVJsWm1GMWJIUXRkRzlyWlc0dGNuTjBjMmNpTENKcmRXSmxjbTVsZEdWekxtbHZMM05sY25acFkyVmhZMk52ZFc1MEwzTmxjblpwWTJVdFlXTmpiM1Z1ZEM1dVlXMWxJam9pWkdWbVlYVnNkQ0lzSW10MVltVnlibVYwWlhNdWFXOHZjMlZ5ZG1salpXRmpZMjkxYm5RdmMyVnlkbWxqWlMxaFkyTnZkVzUwTG5WcFpDSTZJamt6WWpSbFkyVmpMVEU1Tm1NdE5EYzVaaTA0T1RRM0xXTmlOVEk0TlRObE1URTNaQ0lzSW5OMVlpSTZJbk41YzNSbGJUcHpaWEoyYVdObFlXTmpiM1Z1ZERwa1pXWmhkV3gwT21SbFptRjFiSFFpZlEuT3pSeUt5VXRDNFBmTjVHRUw1aUNmVmhJYVhLOG85YXljNjhQeE5UaDBxZk1ZLTBlMXEwckx2WnZ5V1gyVG5YMExwa3BZdEk2SWEtZVRCX0VHOG16YlU4aVZqYjluS28wZ0V3dGVNZV96TVVqWlpOcUluRzhzMU5mV05Id0hBR1UzREY4NU4wMUc0aVRFNUR3QkpqallieDRreW5hbG5kdkZDM2U4SGE4c1VXazJmZFNPb0hZTVR4OWVMV0VuVEF1QTl5ZlFoVDhMaGlXMk9qWkxYSWdIcXBiMzZDUE4wQm5pUVlzRkhlR0kwa1NCR3AtMmxNWmhuLVlIU0ZSWXdPTEFDNXdGM0gtS3o0b2pnSmtyNENrSFp4TXlOclBBRUJSdUdrRmhwdV9naldUNVd0NW51YXU3UGdBYXB2eENzdnpCOFpjRUFObk1vODJMNl9LVGVLWnhR"
+          livenessProbe:
+            httpGet:
+              port: 5000
+              path: /healthz
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              port: 5000
+              path: /healthz
+            initialDelaySeconds: 3
+            periodSeconds: 5

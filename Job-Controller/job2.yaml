@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job2
+spec:
+  template:
+    spec:
+      containers:
+      - name: job2
+        image: us.gcr.io/dev-trials-q/gke-job-trigger-job2:v0.0
+        env:
+          - name: PROCESS_FOLDER
+            value: "2021-2-8_11-10-7"
+      restartPolicy: Never
+  backoffLimit: 4
