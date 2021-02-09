@@ -12,3 +12,4 @@ def trigger_job(event, context):
     response = requests.get("http://35.193.45.139/trigger/job2?folder={}".format(pubsub_message))
 
     print("Response Status Code: {}".format(response.status_code))
+    print("Response Text: {}".format(response.text))
