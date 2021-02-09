@@ -32,23 +32,25 @@ def root():
 
 @app.route("/trigger/job1")
 def trigger_job1():
+    job_name = "job1-{}".format(''.join(random.choices(string.ascii_lowercase, k = 5)))
     with open("job1.yaml") as file:
         body = yaml.safe_load(file)
-        body['metadata']['name'] = "job1-{}".format(''.join(random.choices(string.ascii_lowercase, k = 5)))
+        body['metadata']['name'] = job_name
         
     v1.create_namespaced_job(namespace="default", body=body, pretty=True)
-    return "Job triggered!"
+    return "Job triggered: {}".format(job_name)
 
 @app.route("/trigger/job2")
 def trigger_job2():
     process_folder = request.args.get("folder")
+    job_name = "job2-{}".format(''.join(random.choices(string.ascii_lowercase, k = 5)))
     with open("job2.yaml") as file:
         body = yaml.safe_load(file)
-        body['metadata']['name'] = "job2-{}".format(''.join(random.choices(string.ascii_lowercase, k = 5)))
+        body['metadata']['name'] = job_name
         body['spec']['template']['spec']['containers'][0]['env'][0]['value'] = process_folder
         
     v1.create_namespaced_job(namespace="default", body=body, pretty=True)
-    return "Job triggered!"
+    return "Job triggered: {}".format(job_name)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
